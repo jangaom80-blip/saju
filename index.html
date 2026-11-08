@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>STATLAB 사주 오행 & 신년 재물운 분석기</title>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <style>
+    :root {
+      --bg-dark: #0b0f19;
+      --card-bg: #151b28;
+      --card-border: #242e42;
+      --text-white: #f8fafc;
+      --text-sub: #94a3b8;
+      --text-muted: #64748b;
+      --primary-gold: #f59e0b;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Pretendard', sans-serif; -webkit-tap-highlight-color: transparent; }
+    body { background-color: var(--bg-dark); color: var(--text-white); padding: 20px 14px 40px; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 480px; margin: 0 auto; }
+
+    header { text-align: center; margin-bottom: 22px; }
+    .badge-top { display: inline-block; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.4); color: var(--primary-gold); font-size: 11px; font-weight: 800; padding: 3px 10px; border-radius: 20px; margin-bottom: 8px; }
+    h1 { font-size: 21px; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 5px; }
+    .sub-title { font-size: 12.5px; color: var(--text-sub); }
+
+    .input-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 18px 16px;
+      margin-bottom: 20px;
+    }
+    .form-group { margin-bottom: 14px; }
+    .form-label { display: block; font-size: 13px; font-weight: 700; color: #cbd5e1; margin-bottom: 6px; }
+    .form-input {
+      width: 100%;
+      background: #0f1522;
+      border: 1px solid #334155;
+      border-radius: 10px;
+      padding: 12px 14px;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      outline: none;
+    }
+    .form-input:focus { border-color: var(--primary-gold); }
+
+    .btn-submit {
+      width: 100%;
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      color: #0b0f19;
+      font-size: 15px;
+      font-weight: 900;
+      padding: 15px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(245, 158, 11, 0.3);
+    }
+    .btn-submit:active { transform: scale(0.98); }
+
+    #resultArea { display: none; }
+    .result-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 20px 16px;
+      margin-bottom: 16px;
+      animation: fadeIn 0.3s ease-out;
+    }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+    .result-badge { display: inline-block; font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 8px; margin-bottom: 10px; }
+    .score-banner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #0f1522;
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 16px;
+    }
+    .score-title { font-size: 13px; color: var(--text-sub); }
+    .score-val { font-size: 26px; font-weight: 900; color: var(--primary-gold); }
+
+    .five-elements-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    .elem-box {
+      background: #0f1522;
+      border: 1px solid #232c3f;
+      border-radius: 8px;
+      padding: 8px 4px;
+    }
+    .elem-box.weak { border-color: #ef4444; background: rgba(239, 68, 68, 0.1); }
+    .elem-name { font-size: 12px; font-weight: 800; margin-bottom: 2px; }
+    .elem-status { font-size: 10px; color: var(--text-muted); font-weight: 600; }
+    .elem-box.weak .elem-status { color: #f87171; font-weight: 800; }
+
+    .analysis-text {
+      font-size: 13px;
+      line-height: 1.6;
+      color: #e2e8f0;
+      background: #0f1522;
+      border-left: 3px solid var(--primary-gold);
+      padding: 12px 14px;
+      border-radius: 4px 10px 10px 4px;
+      margin-bottom: 16px;
+    }
+
+    .product-box {
+      background: #101625;
+      border: 1px solid #2d3b55;
+      border-radius: 14px;
+      padding: 14px;
+      margin-top: 10px;
+    }
+    .product-box-title { font-size: 13px; font-weight: 900; color: #fff; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+    .product-box-sub { font-size: 11.5px; color: var(--text-sub); margin-bottom: 10px; }
+    .btn-product {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      border: 1px solid #3b82f6;
+      border-radius: 10px;
+      padding: 12px 14px;
+      text-decoration: none;
+      color: #93c5fd;
+      font-weight: 800;
+      font-size: 12.5px;
+    }
+    .btn-product:active { background: #1e3a8a; }
+
+    .btn-share {
+      width: 100%;
+      background: #182030;
+      border: 1px solid #334155;
+      color: #cbd5e1;
+      font-size: 13.5px;
+      font-weight: 800;
+      padding: 13px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 12px;
+    }
+
+    .coupang-notice {
+      font-size: 10.5px;
+      color: #475569;
+      text-align: center;
+      line-height: 1.4;
+      margin-top: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="badge-top">STATLAB MYSTIC ENGINE</div>
+      <h1>신년 사주 오행 & 재물운 분석기</h1>
+      <p class="sub-title">타고난 오행의 균형과 나에게 부족한 재물 기운 진단</p>
+    </header>
+
+    <div class="input-card">
+      <div class="form-group">
+        <label class="form-label" for="birthdate">생년월일 (양력 기준)</label>
+        <input type="date" id="birthdate" class="form-input" value="1990-01-01">
+      </div>
+      <button type="button" class="btn-submit" onclick="analyzeFortune()">
+        🔮 내 사주 오행 & 재물운 3초 분석하기
+      </button>
+    </div>
+
+    <div id="resultArea">
+      <div class="result-card">
+        <div id="zodiacBadge" class="result-badge" style="background: rgba(245, 158, 11, 0.2); color: #f59e0b;"></div>
+
+        <div class="score-banner">
+          <div>
+            <div class="score-title">2026 병오년 재물운 지수</div>
+            <strong style="font-size: 14px; color: #fff;" id="wealthKeyword">재물 축적형</strong>
+          </div>
+          <div class="score-val" id="wealthScore">88점</div>
+        </div>
+
+        <div style="font-size: 12px; font-weight: 700; color: var(--text-sub); margin-bottom: 8px;">
+          📊 타고난 5대 오행 분포
+        </div>
+        <div class="five-elements-grid" id="elementsGrid"></div>
+
+        <div class="analysis-text" id="analysisDescription"></div>
+
+        <div class="product-box">
+          <div class="product-box-title">
+            <span>🍀 부족한 기운을 채우는 맞춤 재물 비책</span>
+          </div>
+          <p class="product-box-sub" id="remedySub"></p>
+
+          <a id="coupangLink" href="https://link.coupang.com/a/itDLVXK9jo" target="_blank" class="btn-product">
+            <span id="productTitle">✨ 지갑 속 24K 순금 행운의 2달러 카드</span>
+            <span>처방템 보기 ↗</span>
+          </a>
+        </div>
+
+        <button type="button" class="btn-share" onclick="copyResult()">
+          📋 내 재물운 분석 결과 복사하기
+        </button>
+
+        <p class="coupang-notice">
+          이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const GAN = ["갑(甲)", "을(乙)", "병(丙)", "정(丁)", "무(戊)", "기(己)", "경(庚)", "신(辛)", "임(壬)", "계(癸)"];
+    const JI = ["자(쥐)", "축(소)", "인(호랑이)", "묘(토끼)", "진(용)", "사(뱀)", "오(말)", "미(양)", "신(원숭이)", "유(닭)", "술(개)", "해(돼지)"];
+    const ELEMENTS = ["목(木)", "화(火)", "토(土)", "금(金)", "수(水)"];
+
+    const REMEDIES = {
+      "목(木)": {
+        name: "재물운 번창 행운부적 & 비취 원석",
+        desc: "성장과 활력을 주관하는 목(木) 기운이 부족합니다. 몸에 지니는 재물 부적이 기운을 북돋워 줍니다.",
+        url: "https://link.coupang.com/a/itEnSlG8gS"
+      },
+      "화(火)": {
+        name: "재물운 극대화 1등 당첨 기원 행운부적",
+        desc: "결단력과 확장을 주관하는 화(火) 기운이 약합니다. 붉은 기운의 부적으로 재물 물꼬를 터야 합니다.",
+        url: "https://link.coupang.com/a/itEnSlG8gS"
+      },
+      "토(土)": {
+        name: "지갑 속 24K 순금 행운의 2달러 카드",
+        desc: "재물을 모으고 담아두는 토(土) 기운이 부족하여 돈이 새어나갈 수 있습니다. 황금 기운으로 지갑을 안정시켜야 합니다.",
+        url: "https://link.coupang.com/a/itDLVXK9jo"
+      },
+      "금(金)": {
+        name: "24K 순금 2달러 황금 액막이 카드",
+        desc: "금전 자체의 결실을 맺는 금(金) 기운이 부족합니다. 순금 2달러 카드로 지갑의 결실운을 극대화하세요.",
+        url: "https://link.coupang.com/a/itDLVXK9jo"
+      },
+      "수(水)": {
+        name: "재물운 번창 1등 기원 행운부적",
+        desc: "유통과 융통을 돕는 수(水) 기운이 부족하여 자금 흐름이 막힐 수 있습니다. 유동성을 열어주는 비책이 필요합니다.",
+        url: "https://link.coupang.com/a/itEnSlG8gS"
+      }
+    };
+
+    function analyzeFortune() {
+      const birthVal = document.getElementById("birthdate").value;
+      if (!birthVal) return alert("생년월일을 선택해주세요!");
+
+      const date = new Date(birthVal);
+      const year = date.getFullYear();
+      const month = date.getMonth() + 1;
+      const day = date.getDate();
+
+      const ganIdx = (year - 4) % 10;
+      const jiIdx = (year - 4) % 12;
+      const myGan = GAN[(ganIdx + 10) % 10];
+      const myJi = JI[(jiIdx + 12) % 12];
+
+      const seed = (year * 3 + month * 7 + day * 11) % 100;
+      const weakElemIdx = seed % 5;
+      const weakElem = ELEMENTS[weakElemIdx];
+
+      const wealthScore = 75 + (seed % 24);
+
+      document.getElementById("zodiacBadge").innerText = `${year}년생 ${myJi}띠 · ${myGan}년생`;
+      document.getElementById("wealthScore").innerText = `${wealthScore}점`;
+      
+      let keyword = "꾸준한 알짜 저축형";
+      if (wealthScore >= 92) keyword = "횡재수·대박 직전형";
+      else if (wealthScore >= 85) keyword = "안정적 자산 증식형";
+      document.getElementById("wealthKeyword").innerText = keyword;
+
+      const grid = document.getElementById("elementsGrid");
+      grid.innerHTML = "";
+      ELEMENTS.forEach(elem => {
+        const isWeak = (elem === weakElem);
+        const box = document.createElement("div");
+        box.className = `elem-box ${isWeak ? 'weak' : ''}`;
+        box.innerHTML = `
+          <div class="elem-name" style="color: ${isWeak ? '#f87171' : '#cbd5e1'};">${elem}</div>
+          <div class="elem-status">${isWeak ? '부족(보완)' : '양호'}</div>
+        `;
+        grid.appendChild(box);
+      });
+
+      document.getElementById("analysisDescription").innerHTML = `
+        당신은 기본적으로 <strong>${myJi}띠</strong>의 기운을 품고 있으며, 전반적인 재물 그릇은 단단한 편입니다.<br><br>
+        다만 타고난 사주에서 <strong>${weakElem} 기운</strong>이 상대적으로 취약하여, 들어온 돈이 밖으로 새거나 큰 기회를 앞두고 결단이 늦어질 수 있습니다. 올해는 부족한 <strong>${weakElem} 기운을 보완하는 물건</strong>을 가까이 두는 것이 금전운 상승의 핵심입니다.
+      `;
+
+      const remedy = REMEDIES[weakElem];
+      document.getElementById("remedySub").innerText = remedy.desc;
+      document.getElementById("productTitle").innerText = remedy.name;
+      document.getElementById("coupangLink").href = remedy.url;
+
+      document.getElementById("resultArea").style.display = "block";
+      document.getElementById("resultArea").scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function copyResult() {
+      const birth = document.getElementById("birthdate").value;
+      const score = document.getElementById("wealthScore").innerText;
+      const keyword = document.getElementById("wealthKeyword").innerText;
+
+      const shareText = `[STATLAB 신년 사주 재물운 결과]\n생년월일: ${birth}\n재물운 지수: ${score} (${keyword})\n\n내 사주 부족한 오행과 재물운 무료 진단하기 👉\nhttps://jangaom80-blip.github.io/saju/`;
+
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(shareText).then(() => alert("결과가 복사되었습니다! 카톡이나 메모장에 붙여넣으세요."));
+      } else {
+        alert("복사 기능이 지원되지 않는 브라우저입니다.");
+      }
+    }
+  </script>
+</body>
+</html>
