@@ -3,7 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>STATLAB 사주 오행 & 신년 재물운 분석기</title>
+  <title>STATLAB 신년 사주 오행 & 재물운 분석기</title>
+
+  <!-- 메타태그 (카카오톡/SNS 공유 미리보기 카드) -->
+  <meta property="og:title" content="STATLAB 신년 사주 오행 & 재물운 분석기">
+  <meta property="og:description" content="생년월일로 확인하는 내 사주 부족한 오행과 맞춤 재물운 처방 비책">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jangaom80-blip.github.io/saju/">
+
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
   <style>
     :root {
@@ -17,14 +24,15 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Pretendard', sans-serif; -webkit-tap-highlight-color: transparent; }
-    body { background-color: var(--bg-dark); color: var(--text-white); padding: 20px 14px 40px; -webkit-font-smoothing: antialiased; }
+    body { background-color: var(--bg-dark); color: var(--text-white); padding: 24px 14px 50px; -webkit-font-smoothing: antialiased; }
     .container { max-width: 480px; margin: 0 auto; }
 
     header { text-align: center; margin-bottom: 22px; }
-    .badge-top { display: inline-block; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.4); color: var(--primary-gold); font-size: 11px; font-weight: 800; padding: 3px 10px; border-radius: 20px; margin-bottom: 8px; }
+    .badge-top { display: inline-block; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.4); color: var(--primary-gold); font-size: 11px; font-weight: 800; padding: 4px 12px; border-radius: 20px; margin-bottom: 8px; }
     h1 { font-size: 21px; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 5px; }
     .sub-title { font-size: 12.5px; color: var(--text-sub); }
 
+    /* 입력 카드 */
     .input-card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
@@ -58,9 +66,11 @@
       border: none;
       cursor: pointer;
       box-shadow: 0 4px 16px rgba(245, 158, 11, 0.3);
+      transition: transform 0.1s;
     }
     .btn-submit:active { transform: scale(0.98); }
 
+    /* 결과창 */
     #resultArea { display: none; }
     .result-card {
       background: var(--card-bg);
@@ -82,7 +92,7 @@
       padding: 14px;
       margin-bottom: 16px;
     }
-    .score-title { font-size: 13px; color: var(--text-sub); }
+    .score-title { font-size: 12px; color: var(--text-sub); margin-bottom: 2px; }
     .score-val { font-size: 26px; font-weight: 900; color: var(--primary-gold); }
 
     .five-elements-grid {
@@ -98,7 +108,7 @@
       border-radius: 8px;
       padding: 8px 4px;
     }
-    .elem-box.weak { border-color: #ef4444; background: rgba(239, 68, 68, 0.1); }
+    .elem-box.weak { border-color: #ef4444; background: rgba(239, 68, 68, 0.12); }
     .elem-name { font-size: 12px; font-weight: 800; margin-bottom: 2px; }
     .elem-status { font-size: 10px; color: var(--text-muted); font-weight: 600; }
     .elem-box.weak .elem-status { color: #f87171; font-weight: 800; }
@@ -114,15 +124,22 @@
       margin-bottom: 16px;
     }
 
+    /* 맞춤 처방 아이템 (쿠팡 파트너스 링크 2종 노출) */
     .product-box {
       background: #101625;
       border: 1px solid #2d3b55;
       border-radius: 14px;
-      padding: 14px;
+      padding: 15px;
       margin-top: 10px;
     }
-    .product-box-title { font-size: 13px; font-weight: 900; color: #fff; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
-    .product-box-sub { font-size: 11.5px; color: var(--text-sub); margin-bottom: 10px; }
+    .product-box-title { font-size: 13.5px; font-weight: 900; color: #fff; margin-bottom: 4px; }
+    .product-box-sub { font-size: 12px; color: var(--text-sub); margin-bottom: 12px; line-height: 1.4; }
+    
+    .remedy-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
     .btn-product {
       display: flex;
       justify-content: space-between;
@@ -135,8 +152,16 @@
       color: #93c5fd;
       font-weight: 800;
       font-size: 12.5px;
+      transition: background 0.15s;
     }
     .btn-product:active { background: #1e3a8a; }
+    .btn-product span:last-child {
+      background: rgba(59, 130, 246, 0.2);
+      color: #60a5fa;
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
 
     .btn-share {
       width: 100%;
@@ -151,12 +176,35 @@
       margin-top: 12px;
     }
 
+    /* 로또 생성기 상호 연결 크로스 링크 배너 */
+    .cross-promo-card {
+      background: linear-gradient(135deg, #172554 0%, #0f172a 100%);
+      border: 1px solid #2563eb;
+      border-radius: 14px;
+      padding: 16px;
+      margin-top: 20px;
+      text-align: center;
+    }
+    .cross-promo-title { font-size: 13.5px; font-weight: 900; color: #60a5fa; margin-bottom: 4px; }
+    .cross-promo-sub { font-size: 12px; color: #94a3b8; margin-bottom: 12px; }
+    .btn-lotto-link {
+      display: block;
+      background: #2563eb;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 800;
+      text-decoration: none;
+      padding: 11px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    }
+
     .coupang-notice {
       font-size: 10.5px;
       color: #475569;
       text-align: center;
       line-height: 1.4;
-      margin-top: 14px;
+      margin-top: 16px;
     }
   </style>
 </head>
@@ -165,19 +213,20 @@
     <header>
       <div class="badge-top">STATLAB MYSTIC ENGINE</div>
       <h1>신년 사주 오행 & 재물운 분석기</h1>
-      <p class="sub-title">타고난 오행의 균형과 나에게 부족한 재물 기운 진단</p>
+      <p class="sub-title">타고난 5대 오행의 균형과 나에게 부족한 재물 기운 처방</p>
     </header>
 
     <div class="input-card">
       <div class="form-group">
         <label class="form-label" for="birthdate">생년월일 (양력 기준)</label>
-        <input type="date" id="birthdate" class="form-input" value="1990-01-01">
+        <input type="date" id="birthdate" class="form-input" value="1985-05-15">
       </div>
       <button type="button" class="btn-submit" onclick="analyzeFortune()">
         🔮 내 사주 오행 & 재물운 3초 분석하기
       </button>
     </div>
 
+    <!-- 결과창 영역 -->
     <div id="resultArea">
       <div class="result-card">
         <div id="zodiacBadge" class="result-badge" style="background: rgba(245, 158, 11, 0.2); color: #f59e0b;"></div>
@@ -197,21 +246,25 @@
 
         <div class="analysis-text" id="analysisDescription"></div>
 
+        <!-- 부족한 오행 맞춤 개운템 (보내주신 8개 링크 연동) -->
         <div class="product-box">
-          <div class="product-box-title">
-            <span>🍀 부족한 기운을 채우는 맞춤 재물 비책</span>
-          </div>
+          <div class="product-box-title">🍀 부족한 기운을 채우는 맞춤 재물 비책</div>
           <p class="product-box-sub" id="remedySub"></p>
-
-          <a id="coupangLink" href="https://link.coupang.com/a/itDLVXK9jo" target="_blank" class="btn-product">
-            <span id="productTitle">✨ 지갑 속 24K 순금 행운의 2달러 카드</span>
-            <span>처방템 보기 ↗</span>
-          </a>
+          <div class="remedy-buttons" id="remedyButtons"></div>
         </div>
 
         <button type="button" class="btn-share" onclick="copyResult()">
           📋 내 재물운 분석 결과 복사하기
         </button>
+
+        <!-- 로또 생성기 상호 연동 배너 -->
+        <div class="cross-promo-card">
+          <div class="cross-promo-title">🎲 재물 기운 충전 후 이번 주 로또 조합 추출</div>
+          <p class="cross-promo-sub">역대 1등 당첨 통계(합계·홀짝) 기반 5세트를 3초 만에 무료로 뽑아보세요.</p>
+          <a href="https://jangaom80-blip.github.io/luckypick/" class="btn-lotto-link">
+            🍀 로또 AI 5조합 무료 추출기 바로가기 ↗
+          </a>
+        </div>
 
         <p class="coupang-notice">
           이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
@@ -225,31 +278,42 @@
     const JI = ["자(쥐)", "축(소)", "인(호랑이)", "묘(토끼)", "진(용)", "사(뱀)", "오(말)", "미(양)", "신(원숭이)", "유(닭)", "술(개)", "해(돼지)"];
     const ELEMENTS = ["목(木)", "화(火)", "토(土)", "금(金)", "수(水)"];
 
+    // 보내주신 8개 쿠팡 파트너스 링크 매칭 테이블
     const REMEDIES = {
       "목(木)": {
-        name: "재물운 번창 행운부적 & 비취 원석",
-        desc: "성장과 활력을 주관하는 목(木) 기운이 부족합니다. 몸에 지니는 재물 부적이 기운을 북돋워 줍니다.",
-        url: "https://link.coupang.com/a/itEnSlG8gS"
+        desc: "성장과 활력을 주관하는 목(木) 기운이 부족합니다. 푸른 원석과 생기 넘치는 나무 기운을 곁에 두어 재물운을 틔워야 합니다.",
+        items: [
+          { name: "✨ 기운 보완 비취 원석 팔찌", url: "https://link.coupang.com/a/ivfJEcXq8G" },
+          { name: "🌿 번창 기원 돈나무(금전수) 화분", url: "https://link.coupang.com/a/ivfNVVKkg0" }
+        ]
       },
       "화(火)": {
-        name: "재물운 극대화 1등 당첨 기원 행운부적",
-        desc: "결단력과 확장을 주관하는 화(火) 기운이 약합니다. 붉은 기운의 부적으로 재물 물꼬를 터야 합니다.",
-        url: "https://link.coupang.com/a/itEnSlG8gS"
+        desc: "결단력과 확장을 이끄는 화(火) 기운이 약합니다. 붉은 호안석의 강력한 에너지와 황금 부적으로 재물 물꼬를 열어야 합니다.",
+        items: [
+          { name: "🔥 결단·성공 레드 타이거아이 팔찌", url: "https://link.coupang.com/a/ivfYpzUJDU" },
+          { name: "🧧 재물 대통 1등 기원 황금부적", url: "https://link.coupang.com/a/ivfSl97FVk" }
+        ]
       },
       "토(土)": {
-        name: "지갑 속 24K 순금 행운의 2달러 카드",
-        desc: "재물을 모으고 담아두는 토(土) 기운이 부족하여 돈이 새어나갈 수 있습니다. 황금 기운으로 지갑을 안정시켜야 합니다.",
-        url: "https://link.coupang.com/a/itDLVXK9jo"
+        desc: "재물을 단단히 모으고 보관하는 토(土) 기운이 부족하여 헛돈이 나갈 수 있습니다. 묵직한 황금 기운으로 지갑을 안정시켜야 합니다.",
+        items: [
+          { name: "🪙 안정과 번영 재물모형 금전수", url: "https://link.coupang.com/a/ivlvzmoD0e" },
+          { name: "✨ 지갑 속 24K 순금 황금 카드", url: "https://link.coupang.com/a/ivk8GnU0Ci" }
+        ]
       },
       "금(金)": {
-        name: "24K 순금 2달러 황금 액막이 카드",
-        desc: "금전 자체의 결실을 맺는 금(金) 기운이 부족합니다. 순금 2달러 카드로 지갑의 결실운을 극대화하세요.",
-        url: "https://link.coupang.com/a/itDLVXK9jo"
+        desc: "금전 결실을 맺는 금(金) 기운이 약합니다. 고순도 순금 카드와 골드바 기운을 가까이 두어 금전 축적을 극대화해야 합니다.",
+        items: [
+          { name: "✨ 24K 순금 황금 행운 카드", url: "https://link.coupang.com/a/ivk8GnU0Ci" },
+          { name: "🏆 고순도 재물 축적 골드바", url: "https://link.coupang.com/a/ivlf9iwU7o" }
+        ]
       },
       "수(水)": {
-        name: "재물운 번창 1등 기원 행운부적",
-        desc: "유통과 융통을 돕는 수(水) 기운이 부족하여 자금 흐름이 막힐 수 있습니다. 유동성을 열어주는 비책이 필요합니다.",
-        url: "https://link.coupang.com/a/itEnSlG8gS"
+        desc: "유통과 융통을 돕는 수(水) 기운이 부족하여 자금 흐름이 막힐 수 있습니다. 검은 흑요석과 재물 금전수로 막힌 흐름을 유연하게 순환시켜야 합니다.",
+        items: [
+          { name: "🌊 자금 순환 블랙 옵시디안 팔찌", url: "https://link.coupang.com/a/ivljrHHLtQ" },
+          { name: "🪙 재물 유통 재물모형 금전수", url: "https://link.coupang.com/a/ivlvzmoD0e" }
+        ]
       }
     };
 
@@ -271,7 +335,7 @@
       const weakElemIdx = seed % 5;
       const weakElem = ELEMENTS[weakElemIdx];
 
-      const wealthScore = 75 + (seed % 24);
+      const wealthScore = 78 + (seed % 21);
 
       document.getElementById("zodiacBadge").innerText = `${year}년생 ${myJi}띠 · ${myGan}년생`;
       document.getElementById("wealthScore").innerText = `${wealthScore}점`;
@@ -295,14 +359,24 @@
       });
 
       document.getElementById("analysisDescription").innerHTML = `
-        당신은 기본적으로 <strong>${myJi}띠</strong>의 기운을 품고 있으며, 전반적인 재물 그릇은 단단한 편입니다.<br><br>
-        다만 타고난 사주에서 <strong>${weakElem} 기운</strong>이 상대적으로 취약하여, 들어온 돈이 밖으로 새거나 큰 기회를 앞두고 결단이 늦어질 수 있습니다. 올해는 부족한 <strong>${weakElem} 기운을 보완하는 물건</strong>을 가까이 두는 것이 금전운 상승의 핵심입니다.
+        당신은 기본적으로 <strong>${myJi}띠</strong>의 기운을 타고났으며, 재물 그릇이 탄탄한 사주입니다.<br><br>
+        다만 사주에서 <strong>${weakElem} 기운</strong>이 상대적으로 약하여 돈이 들어오더라도 모이는 데 시간이 걸릴 수 있습니다. 올해는 부족한 <strong>${weakElem} 기운을 보완해 주는 비책 물품</strong>을 소지하거나 가까이 두는 것이 금전운 확장의 핵심 포인트입니다.
       `;
 
+      // 부족한 오행 맞춤 상품 2개 동적 렌더링
       const remedy = REMEDIES[weakElem];
       document.getElementById("remedySub").innerText = remedy.desc;
-      document.getElementById("productTitle").innerText = remedy.name;
-      document.getElementById("coupangLink").href = remedy.url;
+
+      const buttonsContainer = document.getElementById("remedyButtons");
+      buttonsContainer.innerHTML = "";
+      remedy.items.forEach(item => {
+        const a = document.createElement("a");
+        a.href = item.url;
+        a.target = "_blank";
+        a.className = "btn-product";
+        a.innerHTML = `<span>${item.name}</span><span>처방템 보기 ↗</span>`;
+        buttonsContainer.appendChild(a);
+      });
 
       document.getElementById("resultArea").style.display = "block";
       document.getElementById("resultArea").scrollIntoView({ behavior: 'smooth' });
@@ -313,7 +387,7 @@
       const score = document.getElementById("wealthScore").innerText;
       const keyword = document.getElementById("wealthKeyword").innerText;
 
-      const shareText = `[STATLAB 신년 사주 재물운 결과]\n생년월일: ${birth}\n재물운 지수: ${score} (${keyword})\n\n내 사주 부족한 오행과 재물운 무료 진단하기 👉\nhttps://jangaom80-blip.github.io/saju/`;
+      const shareText = `[STATLAB 신년 사주 재물운 결과]\n생년월일: ${birth}\n재물운 지수: ${score} (${keyword})\n\n내 사주 부족한 오행과 맞춤 재물 비책 진단하기 👉\nhttps://jangaom80-blip.github.io/saju/`;
 
       if (navigator.clipboard) {
         navigator.clipboard.writeText(shareText).then(() => alert("결과가 복사되었습니다! 카톡이나 메모장에 붙여넣으세요."));
