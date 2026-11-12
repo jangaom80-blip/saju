@@ -120,45 +120,189 @@
       border-left: 3px solid var(--primary-gold);
       padding: 12px 14px;
       border-radius: 4px 10px 10px 4px;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
 
-    /* 처방 아이템 (쿠팡 파트너스 링크 2종) */
+    /* =========================================
+       고클릭 오행 처방 + 황금세일·로켓프레시 섹션
+       ========================================= */
     .product-box {
-      background: #101625;
-      border: 1px solid #2d3b55;
-      border-radius: 14px;
-      padding: 15px;
+      background: linear-gradient(180deg, #171e31 0%, #0e1320 100%);
+      border: 1.5px solid rgba(245, 158, 11, 0.45);
+      border-radius: 16px;
+      padding: 16px 14px;
       margin-top: 10px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
     }
-    .product-box-title { font-size: 13.5px; font-weight: 900; color: #fff; margin-bottom: 4px; }
-    .product-box-sub { font-size: 12px; color: var(--text-sub); margin-bottom: 12px; line-height: 1.4; }
-    
-    .remedy-buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .btn-product {
+    .product-box-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-      border: 1px solid #3b82f6;
-      border-radius: 10px;
-      padding: 12px 14px;
-      text-decoration: none;
-      color: #93c5fd;
-      font-weight: 800;
-      font-size: 12.5px;
+      margin-bottom: 5px;
     }
-    .btn-product:active { background: #1e3a8a; }
-    .btn-product span:last-child {
-      background: rgba(59, 130, 246, 0.2);
-      color: #60a5fa;
-      font-size: 11px;
-      padding: 3px 8px;
+    .product-box-title { font-size: 15px; font-weight: 900; color: #fbbf24; letter-spacing: -0.3px; }
+    .rocket-pill {
+      background: rgba(56, 189, 248, 0.16);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      color: #38bdf8;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2.5px 8px;
+      border-radius: 12px;
+    }
+    .product-box-sub { font-size: 12px; color: #cbd5e1; margin-bottom: 14px; line-height: 1.45; }
+    
+    /* 오행 맞춤 처방 아이템 카드 */
+    .remedy-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .remedy-card {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      background: #1c253b;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      border-radius: 12px;
+      padding: 12px;
+      text-decoration: none;
+      transition: transform 0.15s ease, background 0.15s ease;
+    }
+    .remedy-card:active { transform: scale(0.98); background: #24304d; }
+
+    .remedy-icon {
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      background: #0f1524;
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 22px;
+    }
+    .remedy-info { flex: 1; min-width: 0; }
+    .remedy-tags { display: flex; gap: 5px; margin-bottom: 3px; }
+    .tag-luck { background: rgba(245, 158, 11, 0.2); color: #fbbf24; font-size: 10px; font-weight: 800; padding: 1.5px 6px; border-radius: 4px; }
+    .tag-rocket { background: rgba(56, 189, 248, 0.18); color: #38bdf8; font-size: 10px; font-weight: 800; padding: 1.5px 6px; border-radius: 4px; }
+    
+    .remedy-name {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #f8fafc;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 2px;
+    }
+    .remedy-desc {
+      font-size: 11.5px;
+      color: #94a3b8;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .remedy-cta {
+      background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+      color: #0b0f19;
+      font-size: 11.5px;
+      font-weight: 900;
+      padding: 9px 11px;
+      border-radius: 9px;
+      white-space: nowrap;
+      box-shadow: 0 2px 10px rgba(245, 158, 11, 0.35);
+    }
+
+    /* 구분선 및 오늘의 특가·로켓프레시 2열 배너 */
+    .deal-divider {
+      border-top: 1px dashed #2e3b56;
+      padding-top: 14px;
+      margin-top: 4px;
+    }
+    .deal-section-label {
+      font-size: 12px;
+      font-weight: 800;
+      color: #e2e8f0;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .quick-deal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .quick-deal-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-radius: 14px;
+      padding: 13px 11px;
+      text-decoration: none;
+      transition: transform 0.15s ease;
+    }
+    .quick-deal-card:active { transform: scale(0.97); }
+
+    /* 황금세일(골드박스) 카드 */
+    .deal-gold {
+      background: linear-gradient(135deg, #451a03 0%, #92400e 100%);
+      border: 1.5px solid #fbbf24;
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.25);
+    }
+    .deal-gold .badge {
+      display: inline-block;
+      background: #fbbf24;
+      color: #111827;
+      font-size: 10px;
+      font-weight: 900;
+      padding: 2px 7px;
       border-radius: 6px;
+      margin-bottom: 7px;
+      width: fit-content;
+    }
+    .deal-gold .title { font-size: 14px; font-weight: 900; color: #fef3c7; margin-bottom: 3px; line-height: 1.25; }
+    .deal-gold .desc { font-size: 11px; color: #fde68a; margin-bottom: 10px; line-height: 1.3; }
+    .deal-gold .cta {
+      background: #fbbf24;
+      color: #111827;
+      font-size: 11.5px;
+      font-weight: 900;
+      text-align: center;
+      padding: 7px 0;
+      border-radius: 8px;
+    }
+
+    /* 로켓프레시 카드 */
+    .deal-fresh {
+      background: linear-gradient(135deg, #064e3b 0%, #047857 100%);
+      border: 1.5px solid #34d399;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.25);
+    }
+    .deal-fresh .badge {
+      display: inline-block;
+      background: #34d399;
+      color: #064e3b;
+      font-size: 10px;
+      font-weight: 900;
+      padding: 2px 7px;
+      border-radius: 6px;
+      margin-bottom: 7px;
+      width: fit-content;
+    }
+    .deal-fresh .title { font-size: 14px; font-weight: 900; color: #ffffff; margin-bottom: 3px; line-height: 1.25; }
+    .deal-fresh .desc { font-size: 11px; color: #d1fae5; margin-bottom: 10px; line-height: 1.3; }
+    .deal-fresh .cta {
+      background: #ffffff;
+      color: #064e3b;
+      font-size: 11.5px;
+      font-weight: 900;
+      text-align: center;
+      padding: 7px 0;
+      border-radius: 8px;
     }
 
     .btn-share {
@@ -171,7 +315,7 @@
       padding: 13px;
       border-radius: 10px;
       cursor: pointer;
-      margin-top: 12px;
+      margin-top: 14px;
     }
 
     /* 로또 생성기 교차 홍보 카드 */
@@ -180,7 +324,7 @@
       border: 1px solid #2563eb;
       border-radius: 14px;
       padding: 16px;
-      margin-top: 20px;
+      margin-top: 16px;
       text-align: center;
     }
     .cross-promo-title { font-size: 13.5px; font-weight: 900; color: #60a5fa; margin-bottom: 4px; }
@@ -272,11 +416,42 @@
 
         <div class="analysis-text" id="analysisDescription"></div>
 
-        <!-- 부족한 오행 맞춤 개운템 (링크 2종 매칭) -->
+        <!-- 부족한 오행 맞춤 개운템 + 황금세일·로켓프레시 -->
         <div class="product-box">
-          <div class="product-box-title">🍀 부족한 기운을 채우는 맞춤 재물 비책</div>
+          <div class="product-box-header">
+            <div class="product-box-title">🍀 부족한 기운 채우는 재물 비책 처방</div>
+            <span class="rocket-pill">🚀 로켓배송</span>
+          </div>
           <p class="product-box-sub" id="remedySub"></p>
+          
+          <!-- 오행별 고클릭 카드 2종 -->
           <div class="remedy-buttons" id="remedyButtons"></div>
+
+          <!-- 황금세일 & 로켓프레시 2열 대형 배너 -->
+          <div class="deal-divider">
+            <div class="deal-section-label">✨ 재물운 확인 기념! 오늘의 특가 & 새벽 장보기</div>
+            <div class="quick-deal-grid">
+              <!-- 황금세일 (골드박스) -->
+              <a href="여기에_황금세일_단축URL_입력" target="_blank" class="quick-deal-card deal-gold">
+                <div>
+                  <span class="badge">🔥 매일 오전 7시</span>
+                  <div class="title">오늘의 황금세일<br>골드박스 특가</div>
+                  <div class="desc">오늘 재물운 잡는 1일 한정 최대 할인</div>
+                </div>
+                <div class="cta">황금특가 열기 ›</div>
+              </a>
+
+              <!-- 로켓프레시 -->
+              <a href="여기에_로켓프레시_단축URL_입력" target="_blank" class="quick-deal-card deal-fresh">
+                <div>
+                  <span class="badge">🥬 새벽 신선배송</span>
+                  <div class="title">로켓프레시<br>빠른 장보기</div>
+                  <div class="desc">내일 아침 문 앞 도착 신선식품·생필품</div>
+                </div>
+                <div class="cta">프레시 보기 ›</div>
+              </a>
+            </div>
+          </div>
         </div>
 
         <button type="button" class="btn-share" onclick="copyResult()">
@@ -309,36 +484,36 @@
       "목(木)": {
         desc: "성장과 활력을 주관하는 목(木) 기운이 부족합니다. 푸른 원석과 생기 넘치는 나무 기운을 곁에 두어 재물운을 틔워야 합니다.",
         items: [
-          { name: "✨ 기운 보완 비취 원석 팔찌", url: "https://link.coupang.com/a/ivfJEcXq8G" },
-          { name: "🌿 번창 기원 돈나무(금전수) 화분", url: "https://link.coupang.com/a/ivfNVVKkg0" }
+          { icon: "📿", tag: "오행 맞춤 처방", name: "천연 비취(제이드) 개운 원석 팔찌", sub: "막힌 재물 물꼬를 틔우고 귀인을 부르는 생명력", url: "https://link.coupang.com/a/ivfJEcXq8G" },
+          { icon: "🌿", tag: "풍수 재물운", name: "번창 기원 돈나무(금전수) 화분", sub: "현관·거실에 두면 복이 굴러들어오는 대표 재물 식물", url: "https://link.coupang.com/a/ivfNVVKkg0" }
         ]
       },
       "화(火)": {
         desc: "결단력과 확장을 이끄는 화(火) 기운이 약합니다. 붉은 호안석의 강력한 에너지와 황금 부적으로 재물 물꼬를 열어야 합니다.",
         items: [
-          { name: "🔥 결단·성공 레드 타이거아이 팔찌", url: "https://link.coupang.com/a/ivfYpzUJDU" },
-          { name: "🧧 재물 대통 1등 기원 황금부적", url: "https://link.coupang.com/a/ivfSl97FVk" }
+          { icon: "🔥", tag: "성공·횡재수", name: "천연 레드 타이거아이(호안석) 팔찌", sub: "결단력을 높이고 재물 기회를 끌어당기는 강력한 화기운", url: "https://link.coupang.com/a/ivfYpzUJDU" },
+          { icon: "🧧", tag: "액운 차단", name: "재물 대통 1등 기원 황금부적", sub: "지갑·휴대폰 속에 넣어 헛돈 나가는 것을 막는 비책", url: "https://link.coupang.com/a/ivfSl97FVk" }
         ]
       },
       "토(土)": {
         desc: "재물을 단단히 모으고 보관하는 토(土) 기운이 부족하여 헛돈이 나갈 수 있습니다. 묵직한 황금 기운으로 지갑을 안정시켜야 합니다.",
         items: [
-          { name: "🪙 안정과 번영 재물모형 금전수", url: "https://link.coupang.com/a/ivlvzmoD0e" },
-          { name: "✨ 지갑 속 24K 순금 황금 카드", url: "https://link.coupang.com/a/ivk8GnU0Ci" }
+          { icon: "🪙", tag: "자산 축적", name: "안정과 번영 재물모형 금전수", sub: "들어온 돈이 새지 않고 단단히 쌓이게 만드는 풍수 비책", url: "https://link.coupang.com/a/ivlvzmoD0e" },
+          { icon: "✨", tag: "지갑 필수템", name: "지갑 속 24K 순금 황금 행운 카드", sub: "지갑에 품고 다니면 금전운이 마르지 않는 순금 부적", url: "https://link.coupang.com/a/ivk8GnU0Ci" }
         ]
       },
       "금(金)": {
         desc: "금전 결실을 맺는 금(金) 기운이 약합니다. 고순도 순금 카드와 골드바 기운을 가까이 두어 금전 축적을 극대화해야 합니다.",
         items: [
-          { name: "✨ 24K 순금 황금 행운 카드", url: "https://link.coupang.com/a/ivk8GnU0Ci" },
-          { name: "🏆 고순도 재물 축적 골드바", url: "https://link.coupang.com/a/ivlf9iwU7o" }
+          { icon: "✨", tag: "금전 결실", name: "24K 순금 황금 행운 카드", sub: "재물 결실을 맺어주고 큰돈을 부르는 순금 개운 아이템", url: "https://link.coupang.com/a/ivk8GnU0Ci" },
+          { icon: "🏆", tag: "대박 기원", name: "고순도 재물 축적 황금 골드바", sub: "책상·금고 옆에 두어 재물 그릇을 키우는 상징 아이템", url: "https://link.coupang.com/a/ivlf9iwU7o" }
         ]
       },
       "수(水)": {
         desc: "유통과 융통을 돕는 수(水) 기운이 부족하여 자금 흐름이 막힐 수 있습니다. 검은 흑요석과 재물 금전수로 막힌 흐름을 유연하게 순환시켜야 합니다.",
         items: [
-          { name: "🌊 자금 순환 블랙 옵시디안 팔찌", url: "https://link.coupang.com/a/ivljrHHLtQ" },
-          { name: "🪙 재물 유통 재물모형 금전수", url: "https://link.coupang.com/a/ivlvzmoD0e" }
+          { icon: "🌊", tag: "자금 순환", name: "천연 블랙 옵시디안(흑요석) 팔찌", sub: "막힌 자금 흐름을 뚫고 나쁜 기운을 튕겨내는 수호석", url: "https://link.coupang.com/a/ivljrHHLtQ" },
+          { icon: "🪙", tag: "재물 유통", name: "재물 유통 황금 재물모형 금전수", sub: "돈의 흐름을 유연하게 돌리고 재복을 부르는 풍수 비책", url: "https://link.coupang.com/a/ivlvzmoD0e" }
         ]
       }
     };
@@ -356,19 +531,16 @@
       const month = date.getMonth() + 1;
       const day = date.getDate();
 
-      // 이름 고유 해시값 계산
       let nameCode = 0;
       for (let i = 0; i < userName.length; i++) {
         nameCode += userName.charCodeAt(i);
       }
 
-      // 60갑자 천간·지지
       const ganIdx = (year - 4) % 10;
       const jiIdx = (year - 4) % 12;
       const myGan = GAN[(ganIdx + 10) % 10];
       const myJi = JI[(jiIdx + 12) % 12];
 
-      // 태어난 시간 가중치
       let timeSeed = 0;
       let timeText = "시주(시간) 생략 분석";
       if (timeVal !== "unknown") {
@@ -376,15 +548,12 @@
         timeText = `${TIME_NAMES[parseInt(timeVal)]}생`;
       }
 
-      // 사주 씨앗값 계산
       const seed = (year * 3 + month * 7 + day * 11 + nameCode + timeSeed) % 1000;
       const weakElemIdx = seed % 5;
       const weakElem = ELEMENTS[weakElemIdx];
 
-      // 재물 점수 산정 (79 ~ 99점)
       const wealthScore = 79 + (seed % 21);
 
-      // UI 렌더링
       document.getElementById("zodiacBadge").innerText = `${userName} 님 · ${year}년생 ${myJi}띠 (${myGan}년) · ${timeText}`;
       document.getElementById("scoreOwnerTitle").innerText = `${userName} 님의 2026 병오년 재물운 지수`;
       document.getElementById("wealthScore").innerText = `${wealthScore}점`;
@@ -407,7 +576,6 @@
         grid.appendChild(box);
       });
 
-      // 맞춤 설명 텍스트
       const timeComment = (timeVal === "unknown") 
         ? "시간이 미입력되어 삼주(년·월·일)를 중심으로 분석되었으며, 기본 그릇 자체가 탄탄한 흐름을 가지고 있습니다."
         : `태어나신 <strong>${TIME_NAMES[parseInt(timeVal)]}</strong>의 기운이 사주 원국과 상호작용하여 말년 금전운에 긍정적인 힘을 실어주고 있습니다.`;
@@ -417,7 +585,7 @@
         다만 타고난 사주 원국에서 <strong>${weakElem} 기운</strong>이 상대적으로 취약하여, 들어온 돈이 예기치 않게 새어나가거나 결정적인 순간에 추진력이 약해질 수 있습니다. 올해는 부족한 <strong>${weakElem} 기운을 보완하는 물건</strong>을 지니거나 침실·현관에 두는 것이 재물 물꼬를 트는 핵심입니다.
       `;
 
-      // 쿠팡 맞춤 처방 아이템 연결
+      // 고시인성 처방 카드 렌더링
       const remedy = REMEDIES[weakElem];
       document.getElementById("remedySub").innerText = remedy.desc;
 
@@ -427,8 +595,19 @@
         const a = document.createElement("a");
         a.href = item.url;
         a.target = "_blank";
-        a.className = "btn-product";
-        a.innerHTML = `<span>${item.name}</span><span>처방템 보기 ↗</span>`;
+        a.className = "remedy-card";
+        a.innerHTML = `
+          <div class="remedy-icon">${item.icon}</div>
+          <div class="remedy-info">
+            <div class="remedy-tags">
+              <span class="tag-luck">${item.tag}</span>
+              <span class="tag-rocket">로켓배송</span>
+            </div>
+            <div class="remedy-name">${item.name}</div>
+            <div class="remedy-desc">${item.sub}</div>
+          </div>
+          <div class="remedy-cta">최저가 ›</div>
+        `;
         buttonsContainer.appendChild(a);
       });
 
