@@ -4,12 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>STATLAB 신년 사주 오행 & 재물운 분석기</title>
+  <meta name="description" content="이름과 생년월시로 무료로 확인하는 2026 병오년 정통 사주 5대 오행 균형 및 부족한 기운 재물운 분석기">
+  <meta name="keywords" content="무료 사주, 신년 재물운, 2026 병오년 운세, 오행 분석기, 부족한 오행 개운법">
 
   <!-- 메타태그 (카카오톡/SNS 공유 카드) -->
   <meta property="og:title" content="STATLAB 정통 사주 오행 & 신년 재물운 분석기">
   <meta property="og:description" content="이름과 생년월시로 분석하는 내 사주 부족한 오행과 맞춤 재물 비책">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://jangaom80-blip.github.io/saju/">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80">
 
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
   <style>
@@ -32,7 +35,7 @@
     h1 { font-size: 21px; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 5px; }
     .sub-title { font-size: 12.5px; color: var(--text-sub); }
 
-    /* 쿠팡 파트너스 필수 대가성 문구 (최상단 고시인성 규격) */
+    /* 쿠팡 파트너스 필수 대가성 문구 (최상단 배치) */
     .coupang-disclosure-top {
       background: rgba(245, 158, 11, 0.16);
       border: 1.5px solid #fbbf24;
@@ -55,7 +58,7 @@
       border: 1px solid var(--card-border);
       border-radius: 16px;
       padding: 18px 16px;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
     .form-group { margin-bottom: 14px; }
     .form-label { display: block; font-size: 13px; font-weight: 700; color: #cbd5e1; margin-bottom: 6px; }
@@ -87,13 +90,12 @@
     .btn-submit:active { transform: scale(0.98); }
 
     /* 결과창 */
-    #resultArea { display: none; }
+    #resultArea { display: none; margin-bottom: 16px; }
     .result-card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 16px;
       padding: 20px 16px;
-      margin-bottom: 16px;
       animation: fadeIn 0.3s ease-out;
     }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
@@ -137,27 +139,89 @@
       border-left: 3px solid var(--primary-gold);
       padding: 12px 14px;
       border-radius: 4px 10px 10px 4px;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
+    }
+
+    /* 오행 맞춤 처방 아이템 카드 (결과창 내부) */
+    .remedy-box {
+      background: #0f1522;
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 12px;
+      padding: 14px 12px;
+      margin-bottom: 14px;
+    }
+    .remedy-box-title { font-size: 14px; font-weight: 900; color: #fbbf24; margin-bottom: 4px; }
+    .remedy-box-sub { font-size: 12px; color: #cbd5e1; margin-bottom: 12px; line-height: 1.45; }
+    .remedy-buttons { display: flex; flex-direction: column; gap: 9px; }
+    .remedy-card {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      background: #1c253b;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      border-radius: 12px;
+      padding: 11px;
+      text-decoration: none;
+    }
+    .remedy-card:active { transform: scale(0.98); background: #24304d; }
+    .remedy-icon {
+      width: 42px;
+      height: 42px;
+      min-width: 42px;
+      background: #0f1524;
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+    }
+    .remedy-info { flex: 1; min-width: 0; }
+    .remedy-tags { display: flex; gap: 5px; margin-bottom: 3px; }
+    .tag-luck { background: rgba(245, 158, 11, 0.2); color: #fbbf24; font-size: 10px; font-weight: 800; padding: 1.5px 6px; border-radius: 4px; }
+    .tag-rocket { background: rgba(56, 189, 248, 0.18); color: #38bdf8; font-size: 10px; font-weight: 800; padding: 1.5px 6px; border-radius: 4px; }
+    .remedy-name { font-size: 13px; font-weight: 800; color: #f8fafc; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px; }
+    .remedy-desc { font-size: 11px; color: #94a3b8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .remedy-cta {
+      background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+      color: #0b0f19;
+      font-size: 11.5px;
+      font-weight: 900;
+      padding: 8px 10px;
+      border-radius: 9px;
+      white-space: nowrap;
+    }
+
+    .btn-share {
+      width: 100%;
+      background: #182030;
+      border: 1px solid #334155;
+      color: #cbd5e1;
+      font-size: 13.5px;
+      font-weight: 800;
+      padding: 13px;
+      border-radius: 10px;
+      cursor: pointer;
     }
 
     /* =========================================
-       고클릭 오행 처방 + 실시간 검색 + 황금세일·로켓프레시
+       상시 노출 쿠팡 실시간 검색 + 특가 섹션
        ========================================= */
     .product-box {
       background: linear-gradient(180deg, #171e31 0%, #0e1320 100%);
       border: 1.5px solid rgba(245, 158, 11, 0.45);
       border-radius: 16px;
       padding: 16px 14px;
-      margin-top: 10px;
+      margin-bottom: 16px;
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
     }
     .product-box-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 5px;
+      margin-bottom: 4px;
     }
-    .product-box-title { font-size: 15px; font-weight: 900; color: #fbbf24; letter-spacing: -0.3px; }
+    .product-box-title { font-size: 14.5px; font-weight: 900; color: #fbbf24; letter-spacing: -0.3px; }
     .rocket-pill {
       background: rgba(56, 189, 248, 0.16);
       border: 1px solid rgba(56, 189, 248, 0.4);
@@ -166,89 +230,17 @@
       font-weight: 800;
       padding: 2.5px 8px;
       border-radius: 12px;
-    }
-    .product-box-sub { font-size: 12px; color: #cbd5e1; margin-bottom: 14px; line-height: 1.45; }
-
-    /* 오행 맞춤 처방 아이템 카드 */
-    .remedy-buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-    .remedy-card {
-      display: flex;
-      align-items: center;
-      gap: 11px;
-      background: #1c253b;
-      border: 1px solid rgba(245, 158, 11, 0.4);
-      border-radius: 12px;
-      padding: 12px;
-      text-decoration: none;
-      transition: transform 0.15s ease, background 0.15s ease;
-    }
-    .remedy-card:active { transform: scale(0.98); background: #24304d; }
-
-    .remedy-icon {
-      width: 44px;
-      height: 44px;
-      min-width: 44px;
-      background: #0f1524;
-      border: 1px solid rgba(245, 158, 11, 0.35);
-      border-radius: 10px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 22px;
-    }
-    .remedy-info { flex: 1; min-width: 0; }
-    .remedy-tags { display: flex; gap: 5px; margin-bottom: 3px; }
-    .tag-luck { background: rgba(245, 158, 11, 0.2); color: #fbbf24; font-size: 10px; font-weight: 800; padding: 1.5px 6px; border-radius: 4px; }
-    .tag-rocket { background: rgba(56, 189, 248, 0.18); color: #38bdf8; font-size: 10px; font-weight: 800; padding: 1.5px 6px; border-radius: 4px; }
-
-    .remedy-name {
-      font-size: 13.5px;
-      font-weight: 800;
-      color: #f8fafc;
       white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      margin-bottom: 2px;
     }
-    .remedy-desc {
-      font-size: 11.5px;
-      color: #94a3b8;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .remedy-cta {
-      background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
-      color: #0b0f19;
-      font-size: 11.5px;
-      font-weight: 900;
-      padding: 9px 11px;
-      border-radius: 9px;
-      white-space: nowrap;
-      box-shadow: 0 2px 10px rgba(245, 158, 11, 0.35);
-    }
+    .product-box-sub { font-size: 12px; color: #fde68a; font-weight: 700; margin-bottom: 12px; line-height: 1.4; }
 
-    /* 쿠팡 실시간 상품 검색 바 (사주 골드 테마) */
+    /* 쿠팡 실시간 상품 검색 바 */
     .search-box-wrap {
       background: #0b111e;
       border: 1.5px solid #f59e0b;
       border-radius: 12px;
       padding: 11px 10px;
       margin-bottom: 14px;
-    }
-    .search-box-label {
-      font-size: 11.5px;
-      font-weight: 800;
-      color: #fde68a;
-      margin-bottom: 7px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
     }
     .search-input-row {
       display: flex;
@@ -340,31 +332,10 @@
       object-fit: contain;
       padding: 2px;
     }
-    .api-prod-body {
-      flex: 1;
-      min-width: 0;
-    }
-    .api-prod-badges {
-      display: flex;
-      gap: 4px;
-      margin-bottom: 3px;
-    }
-    .api-badge-rocket {
-      background: rgba(56, 189, 248, 0.2);
-      color: #38bdf8;
-      font-size: 9.5px;
-      font-weight: 800;
-      padding: 1px 5px;
-      border-radius: 4px;
-    }
-    .api-badge-free {
-      background: rgba(16, 185, 129, 0.2);
-      color: #34d399;
-      font-size: 9.5px;
-      font-weight: 800;
-      padding: 1px 5px;
-      border-radius: 4px;
-    }
+    .api-prod-body { flex: 1; min-width: 0; }
+    .api-prod-badges { display: flex; gap: 4px; margin-bottom: 3px; }
+    .api-badge-rocket { background: rgba(56, 189, 248, 0.2); color: #38bdf8; font-size: 9.5px; font-weight: 800; padding: 1px 5px; border-radius: 4px; }
+    .api-badge-free { background: rgba(16, 185, 129, 0.2); color: #34d399; font-size: 9.5px; font-weight: 800; padding: 1px 5px; border-radius: 4px; }
     .api-prod-name {
       font-size: 12.5px;
       font-weight: 700;
@@ -376,11 +347,7 @@
       line-height: 1.3;
       margin-bottom: 3px;
     }
-    .api-prod-price {
-      font-size: 13.5px;
-      font-weight: 900;
-      color: #fbbf24;
-    }
+    .api-prod-price { font-size: 13.5px; font-weight: 900; color: #fbbf24; }
     .api-prod-go {
       background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
       color: #0b0f19;
@@ -391,21 +358,7 @@
       white-space: nowrap;
     }
 
-    /* 구분선 및 오늘의 특가·로켓프레시 2열 배너 */
-    .deal-divider {
-      border-top: 1px dashed #2e3b56;
-      padding-top: 14px;
-      margin-top: 4px;
-    }
-    .deal-section-label {
-      font-size: 12px;
-      font-weight: 800;
-      color: #e2e8f0;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
+    /* 오늘의 특가·로켓프레시 2열 배너 */
     .quick-deal-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -422,7 +375,6 @@
     }
     .quick-deal-card:active { transform: scale(0.97); }
 
-    /* 황금세일(골드박스) 카드 */
     .deal-gold {
       background: linear-gradient(135deg, #451a03 0%, #92400e 100%);
       border: 1.5px solid #fbbf24;
@@ -451,7 +403,6 @@
       border-radius: 8px;
     }
 
-    /* 로켓프레시 카드 */
     .deal-fresh {
       background: linear-gradient(135deg, #064e3b 0%, #047857 100%);
       border: 1.5px solid #34d399;
@@ -480,41 +431,39 @@
       border-radius: 8px;
     }
 
-    .btn-share {
-      width: 100%;
-      background: #182030;
-      border: 1px solid #334155;
-      color: #cbd5e1;
-      font-size: 13.5px;
-      font-weight: 800;
-      padding: 13px;
-      border-radius: 10px;
-      cursor: pointer;
-      margin-top: 14px;
+    /* 3개 사이트 순환 배너 */
+    .cross-suite-box {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 15px 14px;
     }
-
-    /* 로또 생성기 교차 홍보 카드 */
-    .cross-promo-card {
-      background: linear-gradient(135deg, #172554 0%, #0f172a 100%);
-      border: 1px solid #2563eb;
-      border-radius: 14px;
-      padding: 16px;
-      margin-top: 16px;
+    .cross-suite-title {
+      font-size: 13px;
+      font-weight: 900;
+      color: #e2e8f0;
+      margin-bottom: 10px;
       text-align: center;
     }
-    .cross-promo-title { font-size: 13.5px; font-weight: 900; color: #60a5fa; margin-bottom: 4px; }
-    .cross-promo-sub { font-size: 12px; color: #94a3b8; margin-bottom: 12px; }
-    .btn-lotto-link {
-      display: block;
-      background: #2563eb;
-      color: #fff;
-      font-size: 13px;
-      font-weight: 800;
-      text-decoration: none;
-      padding: 11px;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    .cross-suite-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
     }
+    .cross-link-btn {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: #0f1522;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 11px 10px;
+      text-decoration: none;
+      text-align: center;
+    }
+    .cross-link-btn:active { border-color: var(--primary-gold); }
+    .cross-link-btn strong { font-size: 12.5px; font-weight: 900; color: #60a5fa; margin-bottom: 3px; }
+    .cross-link-btn span { font-size: 11px; color: var(--text-sub); }
   </style>
 </head>
 <body>
@@ -525,25 +474,22 @@
       <p class="sub-title">성명과 사주원국 기반 5대 오행 균형 및 재물 처방</p>
     </header>
 
-    <!-- 쿠팡 파트너스 필수 대가성 문구 (첫 부분 최상단 배치 · 본문보다 큰 고시인성 표기) -->
+    <!-- 쿠팡 파트너스 필수 대가성 문구 (최상단 배치) -->
     <div class="coupang-disclosure-top">
       <p>이 포스팅은 쿠팡 파트너스 활동의 일환으로,<br>이에 따른 일정액의 수수료를 제공받습니다.</p>
     </div>
 
     <div class="input-card">
-      <!-- 1. 이름 입력 -->
       <div class="form-group">
         <label class="form-label" for="userName">이름 (성함)</label>
         <input type="text" id="userName" class="form-input" placeholder="이름을 입력하세요 (예: 홍길동)">
       </div>
 
-      <!-- 2. 생년월일 -->
       <div class="form-group">
         <label class="form-label" for="birthdate">생년월일 (양력 기준)</label>
         <input type="date" id="birthdate" class="form-input" value="1985-05-15">
       </div>
 
-      <!-- 3. 태어난 시간 (12시진 + 모름 옵션) -->
       <div class="form-group">
         <label class="form-label" for="birthTime">태어난 시간 (시주)</label>
         <select id="birthTime" class="form-input">
@@ -588,75 +534,77 @@
 
         <div class="analysis-text" id="analysisDescription"></div>
 
-        <!-- 부족한 오행 맞춤 개운템 + 실시간 검색 + 황금세일·로켓프레시 -->
-        <div class="product-box">
-          <div class="product-box-header">
-            <div class="product-box-title">🍀 부족한 기운 채우는 재물 비책 처방</div>
-            <span class="rocket-pill">🚀 로켓배송</span>
-          </div>
-          <p class="product-box-sub" id="remedySub"></p>
-
-          <!-- 오행별 고클릭 카드 2종 -->
+        <!-- 부족한 오행 맞춤 개운템 처방 -->
+        <div class="remedy-box">
+          <div class="remedy-box-title">🍀 부족한 기운 채우는 재물 비책 처방</div>
+          <p class="remedy-box-sub" id="remedySub"></p>
           <div class="remedy-buttons" id="remedyButtons"></div>
-
-          <!-- 쿠팡 실시간 상품 검색 박스 -->
-          <div class="search-box-wrap">
-            <div class="search-box-label">🔍 나에게 필요한 개운템 · 생필품 실시간 최저가 검색</div>
-            <div class="search-input-row">
-              <input type="text" id="coupangKeyword" class="search-input" placeholder="쿠팡 상품 검색 (예: 24K순금카드, 금전수)" onkeypress="if(event.key==='Enter') searchCoupangProducts()">
-              <button type="button" class="btn-search" onclick="searchCoupangProducts()">🔍 검색</button>
-            </div>
-            <div class="keyword-chips">
-              <button type="button" class="chip-btn" onclick="quickSearch('24K순금카드')">#24K순금카드</button>
-              <button type="button" class="chip-btn" onclick="quickSearch('원석팔찌')">#원석팔찌</button>
-              <button type="button" class="chip-btn" onclick="quickSearch('금전수화분')">#금전수화분</button>
-              <button type="button" class="chip-btn" onclick="quickSearch('재물부적')">#재물부적</button>
-              <button type="button" class="chip-btn" onclick="quickSearch('황금지갑')">#황금지갑</button>
-            </div>
-
-            <!-- 실시간 API 검색 결과 출력 영역 -->
-            <div id="searchResultArea"></div>
-          </div>
-
-          <!-- 황금세일 & 로켓프레시 2열 대형 배너 -->
-          <div class="deal-divider">
-            <div class="deal-section-label">✨ 재물운 확인 기념! 오늘의 특가 & 새벽 장보기</div>
-            <div class="quick-deal-grid">
-              <!-- 황금세일 (골드박스) -->
-              <a href="https://link.coupang.com/a/ivfSl97FVk" target="_blank" class="quick-deal-card deal-gold">
-                <div>
-                  <span class="badge">🔥 매일 오전 7시</span>
-                  <div class="title">오늘의 황금세일<br>골드박스 특가</div>
-                  <div class="desc">오늘 재물운 잡는 1일 한정 최대 할인</div>
-                </div>
-                <div class="cta">황금특가 열기 ›</div>
-              </a>
-
-              <!-- 로켓프레시 -->
-              <a href="https://link.coupang.com/a/ivk8GnU0Ci" target="_blank" class="quick-deal-card deal-fresh">
-                <div>
-                  <span class="badge">🥬 새벽 신선배송</span>
-                  <div class="title">로켓프레시<br>빠른 장보기</div>
-                  <div class="desc">내일 아침 문 앞 도착 신선식품·생필품</div>
-                </div>
-                <div class="cta">프레시 보기 ›</div>
-              </a>
-            </div>
-          </div>
         </div>
 
         <button type="button" class="btn-share" onclick="copyResult()">
           📋 내 재물운 분석 결과 복사하기
         </button>
+      </div>
+    </div>
 
-        <!-- 로또 생성기 교차 배너 -->
-        <div class="cross-promo-card">
-          <div class="cross-promo-title">🎲 재물 기운 충전 후 이번 주 로또 조합 추출</div>
-          <p class="cross-promo-sub">역대 1등 당첨 통계(합계·홀짝) 기반 5세트를 3초 만에 무료로 뽑아보세요.</p>
-          <a href="https://jangaom80-blip.github.io/luckypick/" class="btn-lotto-link">
-            🍀 로또 AI 5조합 무료 추출기 바로가기 ↗
-          </a>
+    <!-- 상시 노출 쿠팡 실시간 검색 + 황금세일·로켓프레시 -->
+    <div class="product-box">
+      <div class="product-box-header">
+        <div class="product-box-title">🔍 재물 기운 개운템 & 실시간 특가 검색</div>
+        <span class="rocket-pill">🚀 로켓배송</span>
+      </div>
+      <p class="product-box-sub">내 사주에 부족한 기운 채우는 개운템 & 오늘의 골드박스 특가 검색</p>
+
+      <div class="search-box-wrap">
+        <div class="search-input-row">
+          <input type="text" id="coupangKeyword" class="search-input" placeholder="쿠팡 상품 검색 (예: 해바라기액자, 금전수화분)" onkeypress="if(event.key==='Enter') searchCoupangProducts()">
+          <button type="button" class="btn-search" onclick="searchCoupangProducts()">🔍 검색</button>
         </div>
+        <div class="keyword-chips">
+          <button type="button" class="chip-btn" onclick="quickSearch('해바라기액자')">#해바라기액자</button>
+          <button type="button" class="chip-btn" onclick="quickSearch('장지갑')">#장지갑</button>
+          <button type="button" class="chip-btn" onclick="quickSearch('금전수화분')">#금전수화분</button>
+          <button type="button" class="chip-btn" onclick="quickSearch('홍삼선물세트')">#홍삼선물세트</button>
+          <button type="button" class="chip-btn" onclick="quickSearch('황금열쇠고리')">#황금열쇠고리</button>
+        </div>
+
+        <div id="searchResultArea"></div>
+      </div>
+
+      <!-- 황금세일 & 로켓프레시 2열 대형 배너 -->
+      <div class="quick-deal-grid">
+        <a href="https://link.coupang.com/a/ivfSl97FVk" target="_blank" class="quick-deal-card deal-gold">
+          <div>
+            <span class="badge">🔥 매일 오전 7시</span>
+            <div class="title">오늘의 황금세일<br>골드박스 특가</div>
+            <div class="desc">오늘 재물운 잡는 1일 한정 최대 할인</div>
+          </div>
+          <div class="cta">황금특가 열기 ›</div>
+        </a>
+
+        <a href="https://link.coupang.com/a/ivk8GnU0Ci" target="_blank" class="quick-deal-card deal-fresh">
+          <div>
+            <span class="badge">🥬 새벽 신선배송</span>
+            <div class="title">로켓프레시<br>빠른 장보기</div>
+            <div class="desc">내일 아침 문 앞 도착 신선식품·생필품</div>
+          </div>
+          <div class="cta">프레시 보기 ›</div>
+        </a>
+      </div>
+    </div>
+
+    <!-- 3개 사이트 순환 배너 -->
+    <div class="cross-suite-box">
+      <div class="cross-suite-title">✨ STATLAB 무료 인기 도구 바로가기</div>
+      <div class="cross-suite-grid">
+        <a href="https://jangaom80-blip.github.io/luckypick/" class="cross-link-btn">
+          <strong>🎲 로또 AI 5조합</strong>
+          <span>역대 당첨 통계 번호 추출</span>
+        </a>
+        <a href="https://jangaom80-blip.github.io/drive/" class="cross-link-btn">
+          <strong>🚗 카풀 차량비 정산</strong>
+          <span>유류비·경유지 1/N 계산</span>
+        </a>
       </div>
     </div>
   </div>
@@ -687,14 +635,14 @@
         desc: "재물을 단단히 모으고 보관하는 토(土) 기운이 부족하여 헛돈이 나갈 수 있습니다. 묵직한 황금 기운으로 지갑을 안정시켜야 합니다.",
         items: [
           { icon: "🪙", tag: "자산 축적", name: "안정과 번영 재물모형 금전수", sub: "들어온 돈이 새지 않고 단단히 쌓이게 만드는 풍수 비책", url: "https://link.coupang.com/a/ivlvzmoD0e" },
-          { icon: "✨", tag: "지갑 필수템", name: "지갑 속 24K 순금 황금 행운 카드", sub: "지갑에 품고 다니면 금전운이 마르지 않는 순금 부적", url: "https://link.coupang.com/a/ivk8GnU0Ci" }
+          { icon: "✨", tag: "지갑 필수템", name: "지갑 속 황금 행운 카드", sub: "지갑에 품고 다니면 금전운이 마르지 않는 개운 부적", url: "https://link.coupang.com/a/ivk8GnU0Ci" }
         ]
       },
       "금(金)": {
-        desc: "금전 결실을 맺는 금(金) 기운이 약합니다. 고순도 순금 카드와 골드바 기운을 가까이 두어 금전 축적을 극대화해야 합니다.",
+        desc: "금전 결실을 맺는 금(金) 기운이 약합니다. 황금빛 행운 카드와 재물 상징 아이템을 가까이 두어 금전 축적을 극대화해야 합니다.",
         items: [
-          { icon: "✨", tag: "금전 결실", name: "24K 순금 황금 행운 카드", sub: "재물 결실을 맺어주고 큰돈을 부르는 순금 개운 아이템", url: "https://link.coupang.com/a/ivk8GnU0Ci" },
-          { icon: "🏆", tag: "대박 기원", name: "고순도 재물 축적 황금 골드바", sub: "책상·금고 옆에 두어 재물 그릇을 키우는 상징 아이템", url: "https://link.coupang.com/a/ivlf9iwU7o" }
+          { icon: "✨", tag: "금전 결실", name: "재물 결실 황금 행운 카드", sub: "재물 결실을 맺어주고 큰돈을 부르는 개운 아이템", url: "https://link.coupang.com/a/ivk8GnU0Ci" },
+          { icon: "🏆", tag: "대박 기원", name: "고급 재물 축적 황금 골드바 모형", sub: "책상·금고 옆에 두어 재물 그릇을 키우는 상징 아이템", url: "https://link.coupang.com/a/ivlf9iwU7o" }
         ]
       },
       "수(水)": {
@@ -826,7 +774,6 @@
         다만 타고난 사주 원국에서 <strong>${weakElem} 기운</strong>이 상대적으로 취약하여, 들어온 돈이 예기치 않게 새어나가거나 결정적인 순간에 추진력이 약해질 수 있습니다. 올해는 부족한 <strong>${weakElem} 기운을 보완하는 물건</strong>을 지니거나 침실·현관에 두는 것이 재물 물꼬를 트는 핵심입니다.
       `;
 
-      // 고시인성 처방 카드 렌더링
       const remedy = REMEDIES[weakElem];
       document.getElementById("remedySub").innerText = remedy.desc;
 
