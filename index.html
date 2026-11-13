@@ -141,7 +141,7 @@
     }
 
     /* =========================================
-       고클릭 오행 처방 + 황금세일·로켓프레시 섹션
+       고클릭 오행 처방 + 실시간 검색 + 황금세일·로켓프레시
        ========================================= */
     .product-box {
       background: linear-gradient(180deg, #171e31 0%, #0e1320 100%);
@@ -168,13 +168,13 @@
       border-radius: 12px;
     }
     .product-box-sub { font-size: 12px; color: #cbd5e1; margin-bottom: 14px; line-height: 1.45; }
-    
+
     /* 오행 맞춤 처방 아이템 카드 */
     .remedy-buttons {
       display: flex;
       flex-direction: column;
       gap: 10px;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
     .remedy-card {
       display: flex;
@@ -205,7 +205,7 @@
     .remedy-tags { display: flex; gap: 5px; margin-bottom: 3px; }
     .tag-luck { background: rgba(245, 158, 11, 0.2); color: #fbbf24; font-size: 10px; font-weight: 800; padding: 1.5px 6px; border-radius: 4px; }
     .tag-rocket { background: rgba(56, 189, 248, 0.18); color: #38bdf8; font-size: 10px; font-weight: 800; padding: 1.5px 6px; border-radius: 4px; }
-    
+
     .remedy-name {
       font-size: 13.5px;
       font-weight: 800;
@@ -231,6 +231,164 @@
       border-radius: 9px;
       white-space: nowrap;
       box-shadow: 0 2px 10px rgba(245, 158, 11, 0.35);
+    }
+
+    /* 쿠팡 실시간 상품 검색 바 (사주 골드 테마) */
+    .search-box-wrap {
+      background: #0b111e;
+      border: 1.5px solid #f59e0b;
+      border-radius: 12px;
+      padding: 11px 10px;
+      margin-bottom: 14px;
+    }
+    .search-box-label {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: #fde68a;
+      margin-bottom: 7px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .search-input-row {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+    .search-input {
+      flex: 1;
+      min-width: 0;
+      background: #151e30;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 10px 12px;
+      color: #fff;
+      font-size: 13.5px;
+      font-weight: 700;
+      outline: none;
+    }
+    .search-input:focus { border-color: #fbbf24; }
+    .search-input::placeholder { color: #64748b; font-weight: 500; }
+    .btn-search {
+      background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+      color: #0b0f19;
+      font-size: 13px;
+      font-weight: 900;
+      padding: 0 14px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .btn-search:active { transform: scale(0.97); }
+
+    /* 추천 키워드 칩 */
+    .keyword-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+    .chip-btn {
+      background: #1a2234;
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      color: #fcd34d;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .chip-btn:active { background: #f59e0b; color: #0b0f19; }
+
+    /* 실시간 API 검색 결과 리스트 */
+    #searchResultArea {
+      display: none;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed #2e3b56;
+    }
+    .search-status-msg {
+      text-align: center;
+      font-size: 12.5px;
+      color: #fde68a;
+      padding: 14px 6px;
+      font-weight: 700;
+    }
+    .search-result-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .api-prod-card {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #172033;
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 10px;
+      padding: 9px;
+      text-decoration: none;
+      transition: transform 0.15s ease;
+    }
+    .api-prod-card:active { transform: scale(0.98); background: #1e2a42; }
+    .api-prod-thumb {
+      width: 58px;
+      height: 58px;
+      min-width: 58px;
+      border-radius: 8px;
+      background: #fff;
+      object-fit: contain;
+      padding: 2px;
+    }
+    .api-prod-body {
+      flex: 1;
+      min-width: 0;
+    }
+    .api-prod-badges {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 3px;
+    }
+    .api-badge-rocket {
+      background: rgba(56, 189, 248, 0.2);
+      color: #38bdf8;
+      font-size: 9.5px;
+      font-weight: 800;
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+    .api-badge-free {
+      background: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+      font-size: 9.5px;
+      font-weight: 800;
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+    .api-prod-name {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #f1f5f9;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      line-height: 1.3;
+      margin-bottom: 3px;
+    }
+    .api-prod-price {
+      font-size: 13.5px;
+      font-weight: 900;
+      color: #fbbf24;
+    }
+    .api-prod-go {
+      background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+      color: #0b0f19;
+      font-size: 11px;
+      font-weight: 900;
+      padding: 7px 9px;
+      border-radius: 7px;
+      white-space: nowrap;
     }
 
     /* 구분선 및 오늘의 특가·로켓프레시 2열 배너 */
@@ -430,16 +588,35 @@
 
         <div class="analysis-text" id="analysisDescription"></div>
 
-        <!-- 부족한 오행 맞춤 개운템 + 황금세일·로켓프레시 -->
+        <!-- 부족한 오행 맞춤 개운템 + 실시간 검색 + 황금세일·로켓프레시 -->
         <div class="product-box">
           <div class="product-box-header">
             <div class="product-box-title">🍀 부족한 기운 채우는 재물 비책 처방</div>
             <span class="rocket-pill">🚀 로켓배송</span>
           </div>
           <p class="product-box-sub" id="remedySub"></p>
-          
+
           <!-- 오행별 고클릭 카드 2종 -->
           <div class="remedy-buttons" id="remedyButtons"></div>
+
+          <!-- 쿠팡 실시간 상품 검색 박스 -->
+          <div class="search-box-wrap">
+            <div class="search-box-label">🔍 나에게 필요한 개운템 · 생필품 실시간 최저가 검색</div>
+            <div class="search-input-row">
+              <input type="text" id="coupangKeyword" class="search-input" placeholder="쿠팡 상품 검색 (예: 24K순금카드, 금전수)" onkeypress="if(event.key==='Enter') searchCoupangProducts()">
+              <button type="button" class="btn-search" onclick="searchCoupangProducts()">🔍 검색</button>
+            </div>
+            <div class="keyword-chips">
+              <button type="button" class="chip-btn" onclick="quickSearch('24K순금카드')">#24K순금카드</button>
+              <button type="button" class="chip-btn" onclick="quickSearch('원석팔찌')">#원석팔찌</button>
+              <button type="button" class="chip-btn" onclick="quickSearch('금전수화분')">#금전수화분</button>
+              <button type="button" class="chip-btn" onclick="quickSearch('재물부적')">#재물부적</button>
+              <button type="button" class="chip-btn" onclick="quickSearch('황금지갑')">#황금지갑</button>
+            </div>
+
+            <!-- 실시간 API 검색 결과 출력 영역 -->
+            <div id="searchResultArea"></div>
+          </div>
 
           <!-- 황금세일 & 로켓프레시 2열 대형 배너 -->
           <div class="deal-divider">
@@ -485,6 +662,7 @@
   </div>
 
   <script>
+    const WORKER_URL = "https://coupang-api.aom100.workers.dev";
     const GAN = ["갑(甲)", "을(乙)", "병(丙)", "정(丁)", "무(戊)", "기(己)", "경(庚)", "신(辛)", "임(壬)", "계(癸)"];
     const JI = ["자(쥐)", "축(소)", "인(호랑이)", "묘(토끼)", "진(용)", "사(뱀)", "오(말)", "미(양)", "신(원숭이)", "유(닭)", "술(개)", "해(돼지)"];
     const ELEMENTS = ["목(木)", "화(火)", "토(土)", "금(金)", "수(水)"];
@@ -528,6 +706,59 @@
       }
     };
 
+    function quickSearch(word) {
+      document.getElementById('coupangKeyword').value = word;
+      searchCoupangProducts();
+    }
+
+    async function searchCoupangProducts() {
+      const keyword = document.getElementById('coupangKeyword').value.trim();
+      const resultArea = document.getElementById('searchResultArea');
+
+      if (!keyword) {
+        alert('검색할 상품명을 입력해주세요!');
+        document.getElementById('coupangKeyword').focus();
+        return;
+      }
+
+      resultArea.style.display = 'block';
+      resultArea.innerHTML = `<div class="search-status-msg">🔍 쿠팡에서 '${keyword}' 실시간 최저가를 찾는 중...</div>`;
+
+      try {
+        const res = await fetch(`${WORKER_URL}/?keyword=${encodeURIComponent(keyword)}&limit=6`);
+        const json = await res.json();
+
+        const products = json?.data?.productData || [];
+        if (json.rCode !== "0" || products.length === 0) {
+          resultArea.innerHTML = `<div class="search-status-msg" style="color:#94a3b8;">검색 결과가 없습니다. 다른 키워드로 검색해 보세요.</div>`;
+          return;
+        }
+
+        let html = `<div class="search-result-list">`;
+        products.forEach(item => {
+          const priceStr = Number(item.productPrice || 0).toLocaleString() + '원';
+          const rocketBadge = item.isRocket ? `<span class="api-badge-rocket">🚀 로켓배송</span>` : '';
+          const freeBadge = item.isFreeShipping ? `<span class="api-badge-free">무료배송</span>` : '';
+
+          html += `
+            <a href="${item.productUrl}" target="_blank" class="api-prod-card">
+              <img src="${item.productImage}" alt="" class="api-prod-thumb" onerror="this.style.display='none'">
+              <div class="api-prod-body">
+                <div class="api-prod-badges">${rocketBadge}${freeBadge}</div>
+                <div class="api-prod-name">${item.productName}</div>
+                <div class="api-prod-price">${priceStr}</div>
+              </div>
+              <div class="api-prod-go">최저가 ›</div>
+            </a>
+          `;
+        });
+        html += `</div>`;
+        resultArea.innerHTML = html;
+      } catch (err) {
+        resultArea.innerHTML = `<div class="search-status-msg" style="color:#f87171;">일시적인 통신 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.</div>`;
+      }
+    }
+
     function analyzeFortune() {
       const nameInput = document.getElementById("userName").value.trim();
       const userName = nameInput || "회원";
@@ -567,7 +798,7 @@
       document.getElementById("zodiacBadge").innerText = `${userName} 님 · ${year}년생 ${myJi}띠 (${myGan}년) · ${timeText}`;
       document.getElementById("scoreOwnerTitle").innerText = `${userName} 님의 2026 병오년 재물운 지수`;
       document.getElementById("wealthScore").innerText = `${wealthScore}점`;
-      
+
       let keyword = "알짜 저축·자산 방어형";
       if (wealthScore >= 93) keyword = "강력한 횡재수·대박 직전형";
       else if (wealthScore >= 86) keyword = "안정적 기회 확장·투자 증식형";
@@ -586,7 +817,7 @@
         grid.appendChild(box);
       });
 
-      const timeComment = (timeVal === "unknown") 
+      const timeComment = (timeVal === "unknown")
         ? "시간이 미입력되어 삼주(년·월·일)를 중심으로 분석되었으며, 기본 그릇 자체가 탄탄한 흐름을 가지고 있습니다."
         : `태어나신 <strong>${TIME_NAMES[parseInt(timeVal)]}</strong>의 기운이 사주 원국과 상호작용하여 말년 금전운에 긍정적인 힘을 실어주고 있습니다.`;
 
